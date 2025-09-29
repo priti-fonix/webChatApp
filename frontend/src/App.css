@@ -1,0 +1,69 @@
+/* ===========================
+   Global modern dark scrollbar
+=========================== */
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0f1a; /* dark navy-black track */
+  /* border-radius: 10px; */
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #1f2233, #2c2f4a); /* dark gradient thumb */
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #3b3f6b, #4a4f8a); /* slightly lighter hover */
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2c2f4a #0b0f1a; /* thumb & track color */
+}
+
+/* Optional: smooth scrolling for all elements */
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes fadeUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes messagePop {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.chatsContainer::-webkit-scrollbar{
+  display: none;
+}
+
+.fade-up {
+  animation: fadeUp 0.5s ease forwards;
+}
+
+.message-pop {
+  animation: messagePop 0.3s ease forwards;
+}

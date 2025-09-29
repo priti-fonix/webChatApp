@@ -1,0 +1,96 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat App</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 20px; }
+      #chat { display: none; }
+      #messages { list-style: none; padding: 0; }
+      #messages li { padding: 5px; border-bottom: 1px solid #ddd; }
+      .system { color: gray; font-style: italic; }
+      .self { color: green; }
+    </style>
+  </head>
+  <body>
+    <div id="login">
+      <h2>Join Chat</h2>
+      <input id="username" placeholder="Enter your name" />
+      <input id="room" placeholder="Enter room name" />
+      <button onclick="joinChat()">Join</button>
+    </div>
+
+    <div id="chat">
+      <h2 id="roomName"></h2>
+      <ul id="messages"></ul>
+      <p id="typing"></p>
+      <form id="form">
+        <input id="input" autocomplete="off" /><button>Send</button>
+      </form>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      const loginDiv = document.getElementById("login");
+      const chatDiv = document.getElementById("chat");
+      const roomName = document.getElementById("roomName");
+      const messages = document.getElementById("messages");
+      const typing = document.getElementById("typing");
+      const form = document.getElementById("form");
+      const input = document.getElementById("input");
+
+      let username, room;
+
+      function joinChat() {
+        username = document.getElementById("username").value;
+        room = document.getElementById("room").value;
+
+        if (!username || !room) return alert("Enter username and room!");
+
+        socket.emit("joinRoom", { username, room });
+        loginDiv.style.display = "none";
+        chatDiv.style.display = "block";
+        roomName.innerText = `Room: ${room}`;
+      }
+
+      // show chat history
+      socket.on("chatHistory", (history) => {
+        history.forEach((msg) => addMessage(msg));
+      });
+
+      // new messages
+      socket.on("message", (msg) => {
+        addMessage(msg);
+      });
+
+      // typing
+      input.addEventListener("input", () => {
+        socket.emit("typing");
+      });
+
+      socket.on("typing", (msg) => {
+        typing.innerText = msg;
+        setTimeout(() => (typing.innerText = ""), 1000);
+      });
+
+      // send new message
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (input.value) {
+          socket.emit("chatMessage", input.value);
+          input.value = "";
+        }
+      });
+
+      function addMessage(msg) {
+        const  li = document.createElement("li");
+        li.innerHTML = `<strong class="${msg.user === username ? 'self' : ''}">
+          ${msg.user}:</strong> ${msg.text} <small>${msg.time || ""}</small>`;
+        if (msg.user === "system") li.classList.add("system");
+        messages.appendChild(li);
+        messages.scrollTop = messages.scrollHeight;
+      }
+    </script>
+  </body>
+</html> -->

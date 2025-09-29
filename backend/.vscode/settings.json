@@ -1,0 +1,6 @@
+{
+    "workbench.editor.alwaysShowEditorActions": true,
+    "workbench.editorAssociations": {
+        "*.copilotmd": ""
+    }
+}
